@@ -74,7 +74,6 @@ button {
   box-shadow: 0 0 25px 5px #e7934d;
   border-radius: 55px;
   padding: 1vh;
-  background-color: rgb(21, 48, 48);
 }
 
 #popup-btn {
@@ -85,8 +84,13 @@ button {
   box-shadow: 0 0 25px 5px #e7934d;
 }
 
+.dark {
+  background-color: rgb(21, 48, 48);
+}
+
 .darken-btn-container {
   margin-top: 2vh;
+
 }
 /* 
       #7d3f4f - tudor red

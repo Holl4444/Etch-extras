@@ -66,7 +66,6 @@ const createGrid = (size) => {
                 e.target.classList.remove(e.target.classList[1]);
                 e.target.classList.add(`${indx}`);
                 const rgba = `${randomColourRGBA()}${opacity(opInt)}`;
-                console.log(rgba);
                 e.target.style.backgroundColor = rgba;
               }
             } else {
@@ -123,6 +122,10 @@ popupBtn.addEventListener("click", () => {
 darkenBtn.addEventListener("click", () => {
   if (isDarkMode) {
     isDarkMode = false;
+    darkenBtn.textContent = "Darken Mode";
   } else {
-   isDarkMode = true;}
+    isDarkMode = true;
+    darkenBtn.textContent = "Light Mode";
+  }
+  darkenBtn.classList.toggle("dark");
 });

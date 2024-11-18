@@ -10,11 +10,12 @@ const darkenBtn = document.getElementById("darken-btn");
 let isPenDown = false;
 let isDarkMode = false;
 
+// Set up without grid size choice
 window.onload = () => {
   createGrid(4);
 };
 
-// If the entry is cancelled cancel
+// If the entry is cancelled cancel. Get and check input validity
 const getGridSize = () => {
   const gridSize = prompt(
     "Please enter the length of your grid (100 boxes max)"
@@ -34,15 +35,17 @@ const createGrid = (size) => {
   const grid = document.querySelector("section");
   // If we have a valid input for size
   if (size) {
-    grid.replaceChildren();
+    grid.replaceChildren(); // Delete last grid
     for (let i = 0; i < size; i++) {
       const row = document.createElement("div");
       row.classList.add("row");
       for (let j = 0; j < size; j++) {
         const column = document.createElement("div");
         column.classList.add("column");
-        column.setAttribute("style", attribute);
-        column.classList.add("10");
+        column.setAttribute("style", attribute); // fit and fill container
+        column.classList.add("10"); // Set up for opacity function
+
+        // On click if space isnt pressed then either get rgb or rgba
         column.addEventListener("mouseenter", (e) => {
           if (isPenDown) {
             if (isDarkMode) {
@@ -51,11 +54,11 @@ const createGrid = (size) => {
                 const indx = opInt - 1;
                 e.target.classList.remove(e.target.classList[1]);
                 e.target.classList.add(`${indx}`);
-                const rgba = `${randomColourRGBA()}${opacity(opInt)}`;
+                const rgba = `${getRandomRGBA()}${opacity(opInt)}`;
                 e.target.style.backgroundColor = rgba;
               }
             } else {
-              e.target.style.background = randomColourRGB();
+              e.target.style.background = getrandomRGB();
             }
           }
         });
@@ -66,7 +69,7 @@ const createGrid = (size) => {
   }
 };
 
-const randomColourRGB = () => {
+const getrandomRGB = () => {
   const colour = () => {
     return Math.floor(Math.random() * 256);
   };
@@ -74,7 +77,7 @@ const randomColourRGB = () => {
   return rgb;
 };
 
-const randomColourRGBA = () => {
+const getRandomRGBA = () => {
   const colour = () => {
     return Math.floor(Math.random() * 256);
   };
@@ -87,6 +90,7 @@ const opacity = (num) => {
   return rgba2;
 };
 
+// toggle if tiles are interactive
 window.addEventListener("keydown", (e) => {
   if (isPenDown && e.code === "Space") {
     isPenDown = false;
@@ -105,6 +109,7 @@ popupBtn.addEventListener("click", () => {
   createGrid(getGridSize());
 });
 
+// Toggle if tiles will gradually darken
 darkenBtn.addEventListener("click", () => {
   if (isDarkMode) {
     isDarkMode = false;

@@ -37,10 +37,6 @@
   border: 2px solid #4d3a4e;
 }
 
-.draw {
-  background-color: #4d3a4e;
-}
-
 details {
   margin-bottom: 1vh;
   margin: 1vh 0;
@@ -91,8 +87,3 @@ button {
 .darken-btn-container {
   margin-top: 2vh;
 }
-/* 
-      #7d3f4f - tudor red
-      #4d3a4e - dark plum
-     #84a3b6 - dainty blue
-   */

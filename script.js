@@ -50,7 +50,7 @@ const createGrid = (size) => {
           if (isPenDown) {
             if (isDarkMode) {
               const opInt = parseInt(e.target.classList[1]);
-              if (opInt >= 0) {
+              if (opInt > 0) {
                 const indx = opInt - 1;
                 e.target.classList.remove(e.target.classList[1]);
                 e.target.classList.add(`${indx}`);
@@ -90,6 +90,13 @@ const opacity = (num) => {
   return rgba2;
 };
 
+const resetOpacity = () => {
+  for (let i = 0; i < boxes.length; i++) {
+    boxes[i].classList.remove(boxes[i].classList[1]);
+    boxes[i].classList.add(`10`);
+  }
+};
+
 // toggle if tiles are interactive
 window.addEventListener("keydown", (e) => {
   if (isPenDown && e.code === "Space") {
@@ -114,9 +121,12 @@ darkenBtn.addEventListener("click", () => {
   if (isDarkMode) {
     isDarkMode = false;
     darkenBtn.textContent = "Darken Mode";
+    resetOpacity();
   } else {
-    isDarkMode = true;
-    darkenBtn.textContent = "Light Mode";
+    if (!isDarkMode) {
+      isDarkMode = true;
+      darkenBtn.textContent = "Light Mode";
+    }
   }
   darkenBtn.classList.toggle("dark");
 });

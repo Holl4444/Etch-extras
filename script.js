@@ -20,8 +20,9 @@ And a clear grid option. Mouse to add space remove.
 
 const boxes = document.getElementsByClassName("column");
 const popupBtn = document.getElementById("popup-btn");
+const darkenBtn = document.getElementById("darken-btn");
 let isPenDown = false;
-let darken = false;
+let isDarkMode = false;
 
 window.onload = () => {
   createGrid(4);
@@ -58,17 +59,18 @@ const createGrid = (size) => {
         column.classList.add("10");
         column.addEventListener("mouseenter", (e) => {
           if (isPenDown) {
-            if (darken) {
-                const opInt = parseInt(e.target.classList[1]);
-                if (opInt >= 0) {
+            if (isDarkMode) {
+              const opInt = parseInt(e.target.classList[1]);
+              if (opInt >= 0) {
                 const indx = opInt - 1;
                 e.target.classList.remove(e.target.classList[1]);
                 e.target.classList.add(`${indx}`);
                 const rgba = `${randomColourRGBA()}${opacity(opInt)}`;
+                console.log(rgba);
                 e.target.style.backgroundColor = rgba;
-                }
+              }
             } else {
-                e.target.style.background = randomColourRGB();
+              e.target.style.background = randomColourRGB();
             }
           }
         });
@@ -91,7 +93,7 @@ const randomColourRGBA = () => {
   const colour = () => {
     return Math.floor(Math.random() * 256);
   };
-  const rgba1 = `rgba(${colour()}, ${colour()}, ${colour()})`;
+  const rgba1 = `rgba(${colour()}, ${colour()}, ${colour()},`;
   return rgba1;
 };
 
@@ -116,4 +118,11 @@ window.addEventListener("keyup", (e) => {
 
 popupBtn.addEventListener("click", () => {
   createGrid(getGridSize());
+});
+
+darkenBtn.addEventListener("click", () => {
+  if (isDarkMode) {
+    isDarkMode = false;
+  } else {
+   isDarkMode = true;}
 });

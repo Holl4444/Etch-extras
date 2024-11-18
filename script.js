@@ -21,6 +21,7 @@ And a clear grid option. Mouse to add space remove.
 const boxes = document.getElementsByClassName("column");
 const popupBtn = document.getElementById("popup-btn");
 let isPenDown = false;
+let darken = false;
 
 window.onload = () => {
   createGrid(4);
@@ -53,18 +54,21 @@ const createGrid = (size) => {
       for (let j = 0; j < size; j++) {
         const column = document.createElement("div");
         column.classList.add("column");
-        column.classList.add("10");
         column.setAttribute("style", attribute);
+        column.classList.add("10");
         column.addEventListener("mouseenter", (e) => {
           if (isPenDown) {
-            const opInt = parseInt(e.target.classList[1]);
-            console.log(typeof opInt);
-            if (opInt >= 0) {
-              const indx = opInt - 1;
-              e.target.classList.remove(e.target.classList[1]);
-              e.target.classList.add(`${indx}`);
-              const rgba = `${randomColour()}${opacity(opInt)}`;
-              e.target.style.backgroundColor = rgba;
+            if (darken) {
+                const opInt = parseInt(e.target.classList[1]);
+                if (opInt >= 0) {
+                const indx = opInt - 1;
+                e.target.classList.remove(e.target.classList[1]);
+                e.target.classList.add(`${indx}`);
+                const rgba = `${randomColourRGBA()}${opacity(opInt)}`;
+                e.target.style.backgroundColor = rgba;
+                }
+            } else {
+                e.target.style.background = randomColourRGB();
             }
           }
         });
@@ -79,16 +83,16 @@ const randomColourRGB = () => {
   const colour = () => {
     return Math.floor(Math.random() * 256);
   };
-  const rgba1 = `rgba(${colour()}, ${colour()}, ${colour()},`;
-  return rgba1;
+  const rgb = `rgb(${colour()}, ${colour()}, ${colour()})`;
+  return rgb;
 };
 
 const randomColourRGBA = () => {
   const colour = () => {
     return Math.floor(Math.random() * 256);
   };
-  const rgb = `rgb(${colour()}, ${colour()}, ${colour()})`;
-  return rgb;
+  const rgba1 = `rgba(${colour()}, ${colour()}, ${colour()})`;
+  return rgba1;
 };
 
 const opacity = (num) => {

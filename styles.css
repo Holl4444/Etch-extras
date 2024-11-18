@@ -1,6 +1,6 @@
 * {
-  background-color: #7d3f4f;
-  color: #84a3b6;
+  background-color: whitesmoke;
+  color: #ce3fdb;
   margin: 0;
   padding: 0;
 }
@@ -19,7 +19,7 @@
   justify-content: center;
   align-items: center;
   border: 10px solid #bed2df;
-  box-shadow: 0 0 5px 10px #4d3a4e;
+  box-shadow: 0 0 5px 10px #ce3fdb;
 }
 
 .row {
@@ -43,9 +43,11 @@
 button {
   margin-top: 2vh;
   font-size: 6rem;
-  background-color: #b66c7f;
-  color: #4d3a4e;
-  border: 2px solid #4d3a4e;
+  background: linear-gradient(to bottom right, #ea08ff, #e7934d, #ea08ff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  border: 2px solid #a040a8;
+  box-shadow: 0 0 25px 5px #e7934d;
   border-radius: 55px;
   padding: 1vh;
 }
@@ -60,10 +62,9 @@ details {
 
 details > p {
   font-size: 3rem;
-  background-color: #4d3a4e;
-  border: 1px solid #4d3a4e;
   border-radius: 15px;
   padding: 15px;
+  text-shadow: 0 0 2px #080108;
   white-space: pre-line;
 }
 
@@ -74,6 +75,7 @@ summary {
   white-space: pre-line;
   text-align: center;
   margin-bottom: 1vh;
+  text-shadow: 0 0 1px #080108;
 }
 /* 
       #7d3f4f - tudor red

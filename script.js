@@ -3,7 +3,7 @@ Figure out how to make it run faster
 Check what async functions are
 
  */
-
+const GRIDAREA = 150;
 const boxes = document.getElementsByClassName("column");
 const popupBtn = document.getElementById("popup-btn");
 const darkenBtn = document.getElementById("darken-btn");
@@ -15,7 +15,7 @@ window.onload = () => {
   createGrid(4);
 };
 
-// If the entry is cancelled cancel. Get and check input validity
+// If the entry is cancelled cancel else get and check input validity
 const getGridSize = () => {
   const gridSize = prompt(
     "Please enter the length of your grid (100 boxes max)"
@@ -31,11 +31,11 @@ const getGridSize = () => {
 
 const createGrid = (size) => {
   isPenDown = true;
-  let attribute = `min-height: ${150 / size}rem; min-width: ${150 / size}rem;`;
+  let attribute = `min-height: ${GRIDAREA / size}rem; min-width: ${GRIDAREA / size}rem;`;
   const grid = document.querySelector("section");
-  // If we have a valid input for size
+  // If we have a valid input for size delete last grid and create rows and columns in grid-container.
   if (size) {
-    grid.replaceChildren(); // Delete last grid
+    grid.replaceChildren(); 
     for (let i = 0; i < size; i++) {
       const row = document.createElement("div");
       row.classList.add("row");
@@ -45,12 +45,12 @@ const createGrid = (size) => {
         column.setAttribute("style", attribute); // fit and fill container
         column.classList.add("10"); // Set up for opacity function
 
-        // On click if space isnt pressed then either get rgb or rgba
+        // On mouseenter, if space isn't pressed, then either get rgb or rgba depending if dark mode has been clicked and apply 
         column.addEventListener("mouseenter", (e) => {
           if (isPenDown) {
             if (isDarkMode) {
               const opInt = parseInt(e.target.classList[1]);
-              if (opInt > 0) {
+              if (opInt >= 0) {
                 const indx = opInt - 1;
                 e.target.classList.remove(e.target.classList[1]);
                 e.target.classList.add(`${indx}`);
@@ -97,7 +97,7 @@ const resetOpacity = () => {
   }
 };
 
-// toggle if tiles are interactive
+// toggle if tiles are interactable
 window.addEventListener("keydown", (e) => {
   if (isPenDown && e.code === "Space") {
     isPenDown = false;
@@ -112,6 +112,7 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+// Big controller button. It all starts here
 popupBtn.addEventListener("click", () => {
   createGrid(getGridSize());
 });
